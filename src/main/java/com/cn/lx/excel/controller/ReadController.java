@@ -10,6 +10,7 @@ import com.cn.lx.excel.entity.User;
 import com.cn.lx.excel.read.DemoDataListener;
 import com.cn.lx.excel.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.apache.tomcat.util.file.ConfigFileLoader.getInputStream;
 
@@ -36,15 +38,15 @@ public class ReadController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private DemoDataListener demoDataListener;
+
     @GetMapping("readExcel")
     public void readExcel() throws IOException {
         InputStream inputStream = getInputStream("/Users/stevenlu/Desktop/User.xls");
         //String fileName = "/Users/stevenlu/Desktop/User.xls";
-        UserDTO userDTO = new UserDTO();
-        List<UserDTO> userDTOS = new ArrayList<>();
         try {
-            DemoDataListener demoDataListener = new DemoDataListener();
-            ExcelReader excelReader = new ExcelReader(inputStream, ExcelTypeEnum.XLS, userDTOS, demoDataListener);
+            ExcelReader excelReader = new ExcelReader(inputStream, ExcelTypeEnum.XLS, null, demoDataListener);
             excelReader.read(new Sheet(1,1,UserDTO.class));
 
 
@@ -72,7 +74,5 @@ public class ReadController {
         userService.insertUsers(users);
         return "hello";
     }
-
-
 
 }

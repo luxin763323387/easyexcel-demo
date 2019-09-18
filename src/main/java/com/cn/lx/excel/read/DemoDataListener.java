@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSON;
 import com.cn.lx.excel.dto.UserDTO;
 import com.cn.lx.excel.entity.User;
 import com.cn.lx.excel.service.IUserService;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ import java.util.stream.Collectors;
  * @date 2019-09-16 12:44
  */
 @Slf4j
-@Data
+@Component
 public class DemoDataListener extends AnalysisEventListener<UserDTO> {
 
     @Autowired

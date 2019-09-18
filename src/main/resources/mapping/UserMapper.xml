@@ -80,8 +80,7 @@
     where userId = #{userid,jdbcType=INTEGER}
   </update>
   <insert id="insertUsers">
-    INSERT INTO t_user(userId,userName, password,
-    phone)
+    INSERT INTO t_user(userId,userName,password,phone)
     VALUES
     <foreach collection="list" item="item" separator=",">
       (#{item.userid},#{item.username},#{item.password},#{item.phone})
