@@ -69,8 +69,11 @@ public class ReadController {
         //String fileName = "/Users/stevenlu/Desktop/User.xls";
         try {
             ExcelReader excelReader = new ExcelReader(inputStream, ExcelTypeEnum.XLS, null, demoDataListener);
-            excelReader.read(new Sheet(1,1,UserDTO.class));
-            excelReader.read(new Sheet(2,1,UserDTO.class));
+            int size = excelReader.getSheets().size();
+            for(int i = 1; i <= size ;i++){
+                excelReader.read(new Sheet(i,1,UserDTO.class));
+            }
+            excelReader.finish();
         }catch (Exception e){
             log.info("异常信息:{}",e.getMessage());
         }finally {
