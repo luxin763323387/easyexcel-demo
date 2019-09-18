@@ -48,9 +48,6 @@ public class ReadController {
         try {
             ExcelReader excelReader = new ExcelReader(inputStream, ExcelTypeEnum.XLS, null, demoDataListener);
             excelReader.read(new Sheet(1,1,UserDTO.class));
-
-
-
         }catch (Exception e){
             log.info("异常信息:{}",e.getMessage());
         }finally {
@@ -61,6 +58,31 @@ public class ReadController {
             }
         }
     }
+
+    /**
+     * 多个sheet读
+     * @throws IOException
+     */
+    @GetMapping("readExcels")
+    public void readExcels() throws IOException {
+        InputStream inputStream = getInputStream("/Users/stevenlu/Desktop/User.xls");
+        //String fileName = "/Users/stevenlu/Desktop/User.xls";
+        try {
+            ExcelReader excelReader = new ExcelReader(inputStream, ExcelTypeEnum.XLS, null, demoDataListener);
+            excelReader.read(new Sheet(1,1,UserDTO.class));
+            excelReader.read(new Sheet(2,1,UserDTO.class));
+        }catch (Exception e){
+            log.info("异常信息:{}",e.getMessage());
+        }finally {
+            try {
+                inputStream.close();
+            }catch (IOException e){
+                e.getMessage();
+            }
+        }
+    }
+
+
 
     @GetMapping("hello")
     public String helloworld(){
