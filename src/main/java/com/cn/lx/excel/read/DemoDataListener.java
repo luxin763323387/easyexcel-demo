@@ -29,7 +29,7 @@ public class DemoDataListener extends AnalysisEventListener<UserDTO> {
     /**
      * 每隔3000条存储数据库
      */
-    private static final int BATCH_COUNT = 300;
+    private static final int BATCH_COUNT = 5;
     private List<UserDTO> list = new ArrayList<UserDTO>();
 
     /**
